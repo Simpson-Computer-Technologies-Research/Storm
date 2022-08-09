@@ -60,7 +60,7 @@ func main() {
 
 			// Follow the user
 			var (
-				userId                string  = "vhorite9idttql5rfq3gdwb2q"
+				userId                string  = "User ID"
 				bearerToken           *string = Spotify.GetBearerToken(client)
 				followUserResponse, _         = Spotify.FollowUser(client, bearerToken, &userId)
 			)

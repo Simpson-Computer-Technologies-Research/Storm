@@ -45,7 +45,7 @@ func UploadProfileImage(client *http.Client, bearer *string) *string {
 		req, _                  = http.NewRequest("POST", "https://image-upload.spotify.com/v4/user-profile", image)
 	)
 	req.Header = http.Header{
-		"Content-Length": {string(imageBytes)},
+		"Content-Length": {fmt.Sprint(len(imageBytes))},
 		"Authorization":  {*bearer},
 		"Content-Type":   {"image/jpeg"},
 		"User-Agent":     {"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"},
