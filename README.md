@@ -1,4 +1,4 @@
-# Spotify Boost ![Stars](https://img.shields.io/github/stars/realTristan/SpotifyBoost?color=brightgreen) ![Watchers](https://img.shields.io/github/watchers/realTristan/SpotifyBoost?label=Watchers)
+# Spotify Booster ![Stars](https://img.shields.io/github/stars/realTristan/SpotifyBooster?color=brightgreen) ![Watchers](https://img.shields.io/github/watchers/realTristan/SpotifyBooster?label=Watchers)
 ![Header-1280x489](https://user-images.githubusercontent.com/75189508/186448018-50f49ca9-e61f-43b6-8751-b88e84fb4bd2.png)
 
 # About
