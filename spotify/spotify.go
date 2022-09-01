@@ -1,6 +1,6 @@
 package spotify
 
-// Import Functions
+// Import Packages
 import (
 	"bytes"
 	"encoding/json"

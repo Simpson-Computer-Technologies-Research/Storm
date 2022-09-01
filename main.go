@@ -1,5 +1,6 @@
 package main
 
+// Import Packages
 import (
 	"fmt"
 	"io"
@@ -12,11 +13,17 @@ import (
 	"time"
 )
 
-// Function to handle New Follower response
-func HandleResponse(resp *http.Response, iteration *int, name *string) {
+// The HandleResponse() function is used to handle the
+// new follow response.
+func HandleResponse(resp *http.Response, iteration int, name string) {
+	// If the response was a success
 	if resp.StatusCode == 204 {
-		fmt.Printf(" >> Added New Follower [%d] [%s]\n", *iteration+1, *name)
-	} else {
+		// Print the success message
+		fmt.Printf(" >> Added New Follower [%d] [%s]\n", iteration+1, name)
+	} else
+
+	// Print the response body and error status code
+	{
 		var bodyBytes, _ = io.ReadAll(resp.Body)
 		fmt.Println(resp.StatusCode, ":", string(bodyBytes))
 	}
@@ -35,10 +42,13 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+// Main function
 func main() {
-	// Get amount of follows and create wait group
+	// Define Variables
 	var (
-		amount    int            = GetAmount(" >> Amount: ")
+		// Amount of followers to add
+		amount int = GetAmount(" >> Amount: ")
+		// Wait group for goroutines
 		waitGroup sync.WaitGroup = sync.WaitGroup{}
 	)
 	waitGroup.Add(amount)
@@ -46,23 +56,33 @@ func main() {
 	// Start Goroutines
 	for i := 0; i < amount; i++ {
 		go func(iteration int) {
-			// Create a new account
+			// Define Variables
 			var (
-				jar, _                            = cookiejar.New(nil)
-				client               *http.Client = &http.Client{Jar: jar}
-				name, email                       = Global.GenerateFakeInfo(client)
-				_, newUserLoginToken              = Spotify.CreateNewAccount(client, name, email, "secretpassword!") // Replace _ with newUserId if using line 70
-				csrfToken            *string      = Spotify.GetCSRFToken(client)
+				// Create a new request client with cookies
+				jar, _              = cookiejar.New(nil)
+				client *http.Client = &http.Client{Jar: jar}
+
+				// Create a new account (all variables below)
+				name, email = Global.GenerateFakeInfo(client)
+
+				// Replace _ with newUserId if using line 70 (below variable)
+				_, newUserLoginToken = Spotify.CreateNewAccount(client, name, email, "secretpassword!")
+
+				// Get a new csrfToken
+				csrfToken string = Spotify.GetCSRFToken(client)
 			)
 
 			// Authenticate new account
 			Spotify.AuthenticateAccount(client, csrfToken, newUserLoginToken)
 
-			// Follow the user
+			// Define Variables
 			var (
-				userId                string  = "User ID"
-				bearerToken           *string = Spotify.GetBearerToken(client)
-				followUserResponse, _         = Spotify.FollowUser(client, bearerToken, &userId)
+				// The user who you want to boost their followers
+				userId string = "User ID"
+
+				// Follow the above user (all variables below)
+				bearerToken           string = Spotify.GetBearerToken(client)
+				followUserResponse, _        = Spotify.FollowUser(client, bearerToken, userId)
 			)
 
 			// Make the new account look more legit
@@ -70,7 +90,7 @@ func main() {
 			// go Spotify.UpdateProfileImage(client, newUserId, bearerToken)
 
 			// Handle the follow response
-			go HandleResponse(followUserResponse, &iteration, name)
+			HandleResponse(followUserResponse, iteration, name)
 		}(i)
 	}
 	waitGroup.Wait()
