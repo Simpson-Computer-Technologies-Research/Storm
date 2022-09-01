@@ -57,7 +57,7 @@ func SliceContains(slice []string, str string) bool {
 }
 
 // Function to generate random user info
-func GenerateFakeInfo(client *http.Client) (*string, *string) {
+func GenerateFakeInfo(client *http.Client) (string, string) {
 	var req, _ = http.NewRequest("GET", "https://api.namefake.com/", nil)
 	req.Header = http.Header{
 		"User-Agent": {"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"},
@@ -71,5 +71,5 @@ func GenerateFakeInfo(client *http.Client) (*string, *string) {
 		name  = data["name"].(string)
 		email = fmt.Sprintf("%v%s@%v", data["username"], RandomString(7), data["email_d"])
 	)
-	return &name, &email
+	return name, email
 }
