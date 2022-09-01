@@ -1,3 +1,3 @@
-module spotify_follower_booster
+module github.com/realTristan/SpotifyBooster
 
 go 1.17
