@@ -2,7 +2,7 @@
 ![spotify-header-lg](https://user-images.githubusercontent.com/75189508/192172431-879bb8f2-66fc-4fb7-b25a-e1c80535347f.jpg)
 
 <h2>About</h2>
-Storm is a fast and easy to use spotify follower spammer that creates a bunch of random accounts that can be customized to look legit and follow a provided user. Let it be known that this was made for Educational Purposes Only
+Storm is a fast and easy to use spotify follower spammer that creates a bunch of random accounts that can be customized to look legit and follow a provided user. Let it be known that this was made for **Educational Purposes Only**
 
 <h3>Showcase</h3>
 
