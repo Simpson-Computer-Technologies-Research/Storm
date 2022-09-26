@@ -7,10 +7,11 @@ import (
 	"math/rand"
 	"net/http"
 	"net/http/cookiejar"
-	Global "spotify_follower_booster/global"
-	Spotify "spotify_follower_booster/spotify"
 	"sync"
 	"time"
+
+	Global "github.com/realTristan/SpotifyBooster/global"
+	Spotify "github.com/realTristan/SpotifyBooster/spotify"
 )
 
 // The HandleResponse() function is used to handle the
@@ -61,17 +62,13 @@ func main() {
 				// Create a new request client with cookies
 				jar, _              = cookiejar.New(nil)
 				client *http.Client = &http.Client{Jar: jar}
-
 				// Create a new account (all variables below)
 				name, email = Global.GenerateFakeInfo(client)
-
 				// Replace _ with newUserId if using line 70 (below variable)
 				_, newUserLoginToken = Spotify.CreateNewAccount(client, name, email, "secretpassword!")
-
 				// Get a new csrfToken
 				csrfToken string = Spotify.GetCSRFToken(client)
 			)
-
 			// Authenticate new account
 			Spotify.AuthenticateAccount(client, csrfToken, newUserLoginToken)
 
@@ -79,12 +76,10 @@ func main() {
 			var (
 				// The user who you want to boost their followers
 				userId string = "User ID"
-
 				// Follow the above user (all variables below)
 				bearerToken           string = Spotify.GetBearerToken(client)
 				followUserResponse, _        = Spotify.FollowUser(client, bearerToken, userId)
 			)
-
 			// Make the new account look more legit
 			// go Spotify.FollowRandomArtists(client, bearerToken, (rand.Intn(30-1) + 1))
 			// go Spotify.UpdateProfileImage(client, newUserId, bearerToken)

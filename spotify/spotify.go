@@ -9,8 +9,9 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
-	Global "spotify_follower_booster/global"
 	"strings"
+
+	Global "github.com/realTristan/SpotifyBooster/global"
 )
 
 // Define Global Variables
@@ -18,7 +19,7 @@ var (
 	// The data inside the spotify/data.json file
 	JsonData map[string]interface{} = Global.ReadJsonFile("spotify/data.json")
 	// The Available Artist IDs to Follow
-	ArtistList []string = JsonData["artistIds"].([]string)
+	ArtistList []interface{} = JsonData["artistIds"].([]interface{})
 )
 
 // The FollowRandomArtists() function is used to follow random
@@ -31,11 +32,11 @@ func FollowRandomArtists(client *http.Client, bearer string, amount int) {
 	// Iterate over the amount
 	for i := 0; i < amount; i++ {
 		// Get a random artist id
-		var artistId string = ArtistList[rand.Intn(len(ArtistList))]
+		var artistId string = ArtistList[rand.Intn(len(ArtistList))].(string)
 
 		// While the artist is already selected, select a new one
 		for Global.SliceContains(alreadySelected, artistId) {
-			artistId = ArtistList[rand.Intn(len(ArtistList))]
+			artistId = ArtistList[rand.Intn(len(ArtistList))].(string)
 		}
 		// Add the artist to the already selected slice
 		alreadySelected = append(alreadySelected, artistId)

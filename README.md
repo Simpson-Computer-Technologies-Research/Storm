@@ -6,6 +6,13 @@ Storm is a fast and easy to use spotify follower spammer that creates a bunch of
 
 <h3>Showcase</h3>
 
+```go
+>> Amount: 3
+>> Added New Follower [1] [Mark Dawson]
+>> Added New Follower [2] [Harry Corine]
+>> Added New Follower [3] [Gary Bellow]
+```
+
 # License
 MIT License
 
