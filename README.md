@@ -1,5 +1,5 @@
 # Storm ![Stars](https://img.shields.io/github/stars/realTristan/SpotifyBooster?color=brightgreen) ![Watchers](https://img.shields.io/github/watchers/realTristan/SpotifyBooster?label=Watchers)
-![banner (1)](https://user-images.githubusercontent.com/75189508/192172359-a9f69f78-2814-4455-8fe5-ed302dd954e3.png)
+![spotify-header-lg](https://user-images.githubusercontent.com/75189508/192172431-879bb8f2-66fc-4fb7-b25a-e1c80535347f.jpg)
 
 <h2>About</h2>
 Storm is a fast and easy to use spotify follower spammer that creates a bunch of random accounts that can be customized to look legit and follow a provided user. Let it be known that this was made for Educational Purposes Only
