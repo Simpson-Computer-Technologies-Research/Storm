@@ -1,4 +1,4 @@
-package spotify
+package main
 
 // Import Packages
 import (
@@ -11,13 +11,13 @@ import (
 	"net/http"
 	"strings"
 
-	Global "github.com/realTristan/SpotifyBooster/global"
+	Utils "github.com/realTristan/SpotifyBooster/utils"
 )
 
 // Define Global Variables
 var (
 	// The data inside the spotify/data.json file
-	JsonData map[string]interface{} = Global.ReadJsonFile("spotify/data.json")
+	JsonData map[string]interface{} = Utils.ReadJsonFile("spotify/data.json")
 	// The Available Artist IDs to Follow
 	ArtistList []interface{} = JsonData["artistIds"].([]interface{})
 )
@@ -35,7 +35,7 @@ func FollowRandomArtists(client *http.Client, bearer string, amount int) {
 		var artistId string = ArtistList[rand.Intn(len(ArtistList))].(string)
 
 		// While the artist is already selected, select a new one
-		for Global.SliceContains(alreadySelected, artistId) {
+		for Utils.SliceContains(alreadySelected, artistId) {
 			artistId = ArtistList[rand.Intn(len(ArtistList))].(string)
 		}
 		// Add the artist to the already selected slice
@@ -64,7 +64,7 @@ func UploadProfileImage(client *http.Client, bearer string) string {
 	// Define Variables
 	var (
 		// Get a random image from api
-		image io.Reader = Global.GetRandomImage(client)
+		image io.Reader = Utils.GetRandomImage(client)
 		// Get the image bytes
 		imageBytes, _ = io.ReadAll(image)
 	)

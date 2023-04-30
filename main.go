@@ -10,8 +10,7 @@ import (
 	"sync"
 	"time"
 
-	Global "github.com/realTristan/SpotifyBooster/global"
-	Spotify "github.com/realTristan/SpotifyBooster/spotify"
+	Utils "github.com/realTristan/SpotifyBooster/utils"
 )
 
 // The HandleResponse() function is used to handle the
@@ -19,7 +18,7 @@ import (
 func HandleResponse(resp *http.Response, iteration int, name string) {
 	// If the response was a success
 	if resp.StatusCode == 204 {
-		// Print the success message
+		// Print the success messagef
 		fmt.Printf(" >> Added New Follower [%d] [%s]\n", iteration+1, name)
 	} else
 
@@ -63,26 +62,26 @@ func main() {
 				jar, _              = cookiejar.New(nil)
 				client *http.Client = &http.Client{Jar: jar}
 				// Create a new account (all variables below)
-				name, email = Global.GenerateFakeInfo(client)
+				name, email = Utils.GenerateFakeInfo(client)
 				// Replace _ with newUserId if using line 70 (below variable)
-				_, newUserLoginToken = Spotify.CreateNewAccount(client, name, email, "secretpassword!")
+				_, newUserLoginToken = CreateNewAccount(client, name, email, "secretpassword!")
 				// Get a new csrfToken
-				csrfToken string = Spotify.GetCSRFToken(client)
+				csrfToken string = GetCSRFToken(client)
 			)
 			// Authenticate new account
-			Spotify.AuthenticateAccount(client, csrfToken, newUserLoginToken)
+			AuthenticateAccount(client, csrfToken, newUserLoginToken)
 
 			// Define Variables
 			var (
 				// The user who you want to boost their followers
 				userId string = "User ID"
 				// Follow the above user (all variables below)
-				bearerToken           string = Spotify.GetBearerToken(client)
-				followUserResponse, _        = Spotify.FollowUser(client, bearerToken, userId)
+				bearerToken           string = GetBearerToken(client)
+				followUserResponse, _        = FollowUser(client, bearerToken, userId)
 			)
 			// Make the new account look more legit
-			// go Spotify.FollowRandomArtists(client, bearerToken, (rand.Intn(30-1) + 1))
-			// go Spotify.UpdateProfileImage(client, newUserId, bearerToken)
+			// go FollowRandomArtists(client, bearerToken, (rand.Intn(30-1) + 1))
+			// go UpdateProfileImage(client, newUserId, bearerToken)
 
 			// Handle the follow response
 			HandleResponse(followUserResponse, iteration, name)
