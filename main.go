@@ -29,28 +29,20 @@ func HandleResponse(resp *http.Response, iteration int, name string) {
 	}
 }
 
-// Function to get amount of followers to add
-func GetAmount(text string) int {
-	var i int
-	fmt.Print(text)
-	fmt.Scanf("%d", &i)
-	return i
-}
-
-// Initialize random seed
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
-
 // Main function
 func main() {
+	// Initialize a random seed
+	rand.Seed(time.Now().UnixNano())
+
 	// Define Variables
 	var (
 		// Amount of followers to add
-		amount int = GetAmount(" >> Amount: ")
+		amount int = Utils.InputInt(" >> Amount: ")
 		// Wait group for goroutines
 		waitGroup sync.WaitGroup = sync.WaitGroup{}
 	)
+
+	// Add the amount of followers to the wait group
 	waitGroup.Add(amount)
 
 	// Start Goroutines
@@ -61,24 +53,30 @@ func main() {
 				// Create a new request client with cookies
 				jar, _              = cookiejar.New(nil)
 				client *http.Client = &http.Client{Jar: jar}
+
 				// Create a new account (all variables below)
 				name, email = Utils.GenerateFakeInfo(client)
+
 				// Replace _ with newUserId if using line 70 (below variable)
 				_, newUserLoginToken = CreateNewAccount(client, name, email, "secretpassword!")
+
 				// Get a new csrfToken
 				csrfToken string = GetCSRFToken(client)
 			)
-			// Authenticate new account
+
+			// Authenticate new account (spotify.go)
 			AuthenticateAccount(client, csrfToken, newUserLoginToken)
 
 			// Define Variables
 			var (
 				// The user who you want to boost their followers
 				userId string = "User ID"
+
 				// Follow the above user (all variables below)
 				bearerToken           string = GetBearerToken(client)
 				followUserResponse, _        = FollowUser(client, bearerToken, userId)
 			)
+
 			// Make the new account look more legit
 			// go FollowRandomArtists(client, bearerToken, (rand.Intn(30-1) + 1))
 			// go UpdateProfileImage(client, newUserId, bearerToken)
