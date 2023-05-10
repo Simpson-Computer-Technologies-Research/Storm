@@ -2,7 +2,8 @@
 ![banner (1)](https://github.com/realTristan/Storm/assets/75189508/a1e16c76-e279-4a5c-a0ab-b6182fe90b34)
 
 ## About
-Storm is a fast and easy to use spotify follower spammer that creates a bunch of random accounts that can be customized to look legit and follow a provided user. This was made for EDUCATIONAL PURPOSES ONLY
+Storm is a fast and easy to use spotify follower spammer. It generates a number of spotify accounts that can be customized to look legit and follow a specific user.
+This project was made for EDUCATIONAL PURPOSES ONLY and should in no way be used in an abusive manner.
 
 ## Showcase
 ```go
